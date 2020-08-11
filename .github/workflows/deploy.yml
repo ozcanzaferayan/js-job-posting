@@ -10,9 +10,9 @@ jobs:
       matrix:
         node-version: [12.x]
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2.3.2
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2.1.1
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install Packages
@@ -20,7 +20,7 @@ jobs:
     - name: Build page
       run: npm run build
     - name: Deploy to gh-pages
-      uses: ozcanzaferayan/js-job-posting@v1
+      uses: ozcanzaferayan/js-job-posting@v3
       with:
         deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         publish_dir: ./build

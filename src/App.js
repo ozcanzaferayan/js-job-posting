@@ -4,7 +4,7 @@ import './App.css';
 import * as cheerio from 'cheerio-without-node-native';
 import { Map, Marker, Popup, TileLayer, GeoJSON } from 'react-leaflet';
 import L from 'leaflet';
-//import countriesGeoJson from './countries.geo.json'
+//import countriesGeoJson from './countries.geo.json'.
 import countries from './countries.json';
 import cachedFrameworks from './cachedFrameworks.json';
 import c1 from './cache/1.json';
