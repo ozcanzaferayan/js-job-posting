@@ -6,147 +6,97 @@ import { Map, Marker, Popup, TileLayer, GeoJSON } from 'react-leaflet';
 import L from 'leaflet';
 //import countriesGeoJson from './countries.geo.json';
 import countries from './countries.json';
-
-
-
-
-
-var countries2 = [
-  {
-    "timezones": [
-      "Asia/Kabul"
-    ],
-    "latlng": [
-      33,
-      65
-    ],
-    "name": "United States",
-    "country_code": "AF",
-    "capital": "Kabul"
-  },
-  {
-    "timezones": [
-      "Asia/Kabul"
-    ],
-    "latlng": [
-      33,
-      65
-    ],
-    "name": "Canada",
-    "country_code": "CD",
-    "capital": "Kabul"
-  },
-];
+import cachedFrameworks from './cachedFrameworks.json';
+import c1 from './cache/1.json';
+import c2 from './cache/2.json';
+import c3 from './cache/3.json';
+import c4 from './cache/4.json';
+import c5 from './cache/5.json';
 
 var keywords = [
   "react",
-  // "angular",
-  //   "vue",
-  //   "jquery"
-  // 
+  "angular",
+  "vue",
+  "jquery"
 ]
 
 function App() {
-  let [mainNumbers, setMainNumbers] = useState([]);
-  const [result, setResult] = useState([]);
-  const totalCount = countries2.length * keywords.length;
-  let currentCount = 0;
-  const [isFinished, setIsFinished] = useState(false);
+  const [mainNumbers] = useState([...c1, ...c2, ...c3, ...c4, ...c5]);
 
-  const setTimer = () => {
-    const timer = setInterval(() => {
-      console.log(currentCount, totalCount);
-      if (currentCount === totalCount) {
-        // console.log(mainNumbers);
-        // setResult(mainNumbers);
-        // setIsFinished(true);
-        clearInterval(timer);
-      }
-    }, 100);
+
+  const position = [39, 35];
+  const myIcon = (keyword, count) => {
+    let iconSizeByCount = getIconSizeByCount(count);
+    return L.icon({
+      iconUrl: getIconByName(keyword),
+      iconSize: [iconSizeByCount],
+      iconAnchor: [iconSizeByCount / 2, iconSizeByCount / 2]
+    })
+  };
+
+  const getIconSizeByCount = (count) => {
+    if (count < 1000) {
+      return 20;
+    }
+    if (count < 5000) {
+      return 50;
+    }
+    if (count < 10000) {
+      return 60;
+    }
+    if (count < 20000) {
+      return 70;
+    }
+    else {
+      return 80;
+    }
   }
+  const getIconByName = (framework) => {
+    switch (framework) {
+      case 'react':
+        return require('./react.png');
+      case 'angular':
+        return require('./angular.png')
+      case 'vue':
+        return require('./vue.png')
+      case 'jquery':
+        return require('./jquery.png');
 
-  useEffect(() => {
-    let arr = [];
-    keywords.map(keyword => {
-      countries2.map(country =>
-        arr.push({ "keyword": keyword, "country": country.name })
-      );
-    });
-    let requests = arr.map(x => fetch(`https://www.linkedin.com/jobs/search/?keywords=${x.keyword}&location=${x.country}`));
-    Promise.all(requests)
-      .then(requests => requests.map(x => console.log(x)))
-      .then(responses => Promise.all(responses.map(r => r.text())))
-      .then(htmlList => htmlList.forEach(html => {
-        const $ = cheerio.load(html);
-        let count = $('.filter-list__label-count').eq(3).text().replace(/[{(),\.}]/g, '').trim();
-        console.log(count);
-      })
-      );
-
-  }, []);
-
-
-
-  function fetchData(keyword, country) {
-    const urlWorldOMeter = `https://www.linkedin.com/jobs/search/?keywords=${keyword}&location=${country.name}`;
-    return () => fetch(urlWorldOMeter);
-    // fetch(urlWorldOMeter)
-    //   .then((response) => response.text())
-    //   .then((data) => {
-    //     const $ = cheerio.load(data);
-    //     let count = $('.filter-list__label-count').eq(3).text().replace(/[{(),\.}]/g, '').trim();
-    //     count = count === '' ? 0 : count;
-    //     setMainNumbers(oldMainNumbers => [...oldMainNumbers, {
-    //       "keyword": keyword,
-    //       "country": country.name,
-    //       "country_code": country.country_code,
-    //       "latlng": country.latlng,
-    //       "count": count,
-    //     }]);
-    //     currentCount++;
-    //   })
-    //   .catch((err) => console.warn('Something went wrong.', err));
-
-    // setMainNumbers([{
-    //   "keyword": "keyword",
-    //   "country": "country.name",
-    //   "country_code": "country.country_code",
-    //   "latlng": "country.latlng",
-    //   "count": 1,
-    // }, {
-    //   "keyword": "keyword",
-    //   "country": "country.name",
-    //   "country_code": "country.country_code",
-    //   "latlng": "country.latlng",
-    //   "count": 2,
-    // },
-    // ]);
-    currentCount = totalCount;
-
+      default:
+        break;
+    }
   }
-  const position = [51.505, -0.09];
-  const myIcon = L.icon({
-    iconUrl: require('./react.png'),
-    iconSize: [50],
-    iconAnchor: [25, 25],
-    popupAnchor: null,
-    shadowUrl: null,
-    shadowSize: null,
-    shadowAnchor: null
-  });
   return (
     <div id="container" >
-      <Map center={position} zoom={3}>
-        <TileLayer
-          attribution='Tiles &copy; CartoDB'
-          url='http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
-        />
-        {result.map(x => { console.log(x); return <Marker key={x.country_code} icon={myIcon} position={x.latlng}></Marker>; })}
-      </Map></div>
+      <Map center={position} zoom={3} >
+        <TileLayer attribution='Tiles &copy; CartoDB' url='http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png' />
+        {
+          mainNumbers.map(x => {
+            return <Marker key={x.maxFramework.country_code} icon={myIcon(x.maxFramework.keyword, x.maxFramework.count)}
+              position={x.maxFramework.latlng} >
+              <Popup>
+                <span>{x.maxFramework.country}</span>
+                <ul>
+                  {x.frameworks.sort((a, b) => {
+                    let comparison = 0;
+                    if (a.count > b.count) {
+                      comparison = -1;
+                    } else if (a.count < b.count) {
+                      comparison = 1;
+                    }
+                    return comparison;
+                  })
+                    .map(f => {
+                      return <li key={f.keyword}>{f.keyword}: {f.count}</li>
+
+                    })}
+                </ul></Popup>
+            </Marker>
+          })
+        }
+      </Map>
+    </div>
   )
 }
-
-// 
-
 
 export default App;
