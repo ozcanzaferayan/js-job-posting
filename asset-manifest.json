@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/js-job-posting/static/css/main.1fa854ac.chunk.css",
+    "main.js": "/js-job-posting/static/js/main.f8f5f263.chunk.js",
+    "main.js.map": "/js-job-posting/static/js/main.f8f5f263.chunk.js.map",
+    "runtime-main.js": "/js-job-posting/static/js/runtime-main.14f4b921.js",
+    "runtime-main.js.map": "/js-job-posting/static/js/runtime-main.14f4b921.js.map",
+    "static/js/2.d73b5c88.chunk.js": "/js-job-posting/static/js/2.d73b5c88.chunk.js",
+    "static/js/2.d73b5c88.chunk.js.map": "/js-job-posting/static/js/2.d73b5c88.chunk.js.map",
+    "index.html": "/js-job-posting/index.html",
+    "precache-manifest.4016df60d50efe87932d011c81ea7569.js": "/js-job-posting/precache-manifest.4016df60d50efe87932d011c81ea7569.js",
+    "service-worker.js": "/js-job-posting/service-worker.js",
+    "static/css/main.1fa854ac.chunk.css.map": "/js-job-posting/static/css/main.1fa854ac.chunk.css.map",
+    "static/js/2.d73b5c88.chunk.js.LICENSE.txt": "/js-job-posting/static/js/2.d73b5c88.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/js-job-posting/static/media/logo.5d5d9eef.svg",
+    "static/media/react.png": "/js-job-posting/static/media/react.1109a6d4.png",
+    "static/media/vue.png": "/js-job-posting/static/media/vue.32a1e27d.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.14f4b921.js",
+    "static/js/2.d73b5c88.chunk.js",
+    "static/css/main.1fa854ac.chunk.css",
+    "static/js/main.f8f5f263.chunk.js"
+  ]
+}
