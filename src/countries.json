@@ -134,26 +134,6 @@
     },
     {
         "timezones": [
-            "Antarctica/McMurdo",
-            "Antarctica/Casey",
-            "Antarctica/Davis",
-            "Antarctica/DumontDUrville",
-            "Antarctica/Mawson",
-            "Antarctica/Palmer",
-            "Antarctica/Rothera",
-            "Antarctica/Syowa",
-            "Antarctica/Troll",
-            "Antarctica/Vostok"
-        ],
-        "latlng": [-90,
-            0
-        ],
-        "name": "Antarctica",
-        "country_code": "AQ",
-        "capital": null
-    },
-    {
-        "timezones": [
             "Indian/Kerguelen"
         ],
         "latlng": [-49.25,
