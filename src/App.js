@@ -68,12 +68,17 @@ function App() {
   }
   return (
     <div id="container" >
-      <Map center={position} zoom={3} >
+      <Map center={position} zoom={2} >
         <TileLayer attribution='Tiles &copy; CartoDB' url='http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png' />
         {
           mainNumbers.map(x => {
             return <Marker key={x.maxFramework.country_code} icon={myIcon(x.maxFramework.keyword, x.maxFramework.count)}
-              position={x.maxFramework.latlng} >
+              position={x.maxFramework.latlng} onMouseOver={(e) => {
+                e.target.openPopup();
+              }}
+              onMouseOut={(e) => {
+                e.target.closePopup();
+              }}>
               <Popup>
                 <span>{x.maxFramework.country}</span>
                 <ul>
