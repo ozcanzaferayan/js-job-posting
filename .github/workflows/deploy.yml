@@ -19,6 +19,8 @@ jobs:
       run: npm install
     - name: Build page
       run: npm run build
-      with:
-        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        publish_dir: ./build
+    # - name: Deploy to gh-pages
+    #   uses: ozcanzaferayan/js-job-posting@v4
+      # with:
+      #   deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+      #   publish_dir: ./build
