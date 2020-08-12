@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import { Map, Marker, Popup, TileLayer, LayerGroup } from 'react-leaflet';
+import Control from '@skyeer/react-leaflet-custom-control'
 import L from 'leaflet';
 import c1 from './cache/1.json';
 import c2 from './cache/2.json';
@@ -17,6 +18,7 @@ var keywords = [
 
 function App() {
   const [mainNumbers] = useState([...c1, ...c2, ...c3, ...c4, ...c5]);
+  const [isRealSizesShown, setIsRealSizesShown] = useState(false);
 
 
   const position = [39, 35];
@@ -30,7 +32,9 @@ function App() {
   };
 
   const getIconSizeByCount = (count) => {
-    // return count / 100;
+    if (isRealSizesShown) {
+      return count / 100;
+    }
     if (count < 1000) {
       return 20;
     }
@@ -62,13 +66,26 @@ function App() {
         break;
     }
   }
+
+  const showIconsAsPreDefined = () => {
+    setIsRealSizesShown(false);
+  }
+  const showIconsAsReal = () => {
+    setIsRealSizesShown(true);
+  }
   return (
     <div id="container" >
       <Map center={position} zoom={2} >
         <TileLayer attribution='Tiles &copy; CartoDB' url='http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png' />
+        <Control position="topleft">
+          <button onClick={showIconsAsPreDefined}>Show icons as pre-defined</button>
+        </Control>
+        <Control position="topleft">
+          <button onClick={showIconsAsReal}>Show icons as real porpotions</button>
+        </Control>
         {
           mainNumbers.map(x => {
-            return <Marker key={x.maxFramework.country_code} icon={myIcon(x.maxFramework.keyword, x.maxFramework.count)}
+            return <Marker key={x.maxFramework.country_code} icon={myIcon(x.maxFramework.keyword, x.maxFramework.count)} opacity={isRealSizesShown ? .7 : 1}
               position={x.maxFramework.latlng} onMouseOver={(e) => {
                 e.target.openPopup();
               }}
