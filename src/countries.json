@@ -1350,7 +1350,7 @@
             36,
             138
         ],
-        "name": "Japan",
+        "name": "Japonya",
         "country_code": "JP",
         "capital": "Tokyo"
     },
@@ -1851,17 +1851,6 @@
     },
     {
         "timezones": [
-            "Africa/Blantyre"
-        ],
-        "latlng": [-13.5,
-            34
-        ],
-        "name": "Malawi",
-        "country_code": "MW",
-        "capital": "Lilongwe"
-    },
-    {
-        "timezones": [
             "Asia/Kuala_Lumpur",
             "Asia/Kuching"
         ],
@@ -2319,15 +2308,6 @@
         "name": "Singapore",
         "country_code": "SG",
         "capital": "Singapore"
-    },
-    {
-        "timezones": [
-            "Atlantic/South_Georgia"
-        ],
-        "latlng": [-54.5, -37],
-        "name": "South Georgia",
-        "country_code": "GS",
-        "capital": "King Edward Point"
     },
     {
         "timezones": [

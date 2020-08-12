@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import * as cheerio from 'cheerio-without-node-native';
-import { Map, Marker, Popup, TileLayer, GeoJSON } from 'react-leaflet';
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import L from 'leaflet';
-//import countriesGeoJson from './countries.geo.json'.
-import countries from './countries.json';
-import cachedFrameworks from './cachedFrameworks.json';
 import c1 from './cache/1.json';
 import c2 from './cache/2.json';
 import c3 from './cache/3.json';
@@ -35,6 +30,7 @@ function App() {
   };
 
   const getIconSizeByCount = (count) => {
+    // return count / 100;
     if (count < 1000) {
       return 20;
     }
@@ -54,13 +50,13 @@ function App() {
   const getIconByName = (framework) => {
     switch (framework) {
       case 'react':
-        return require('./react.png');
+        return require('./img/react_2.png');
       case 'angular':
-        return require('./angular.png')
+        return require('./img/angular.png')
       case 'vue':
-        return require('./vue.png')
+        return require('./img/vue.png')
       case 'jquery':
-        return require('./jquery.png');
+        return require('./img/jquery.png');
 
       default:
         break;
